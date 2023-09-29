@@ -1,19 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import { baseUrl } from "../../shared/baseUrl";
+import * as Animatable from "react-native-animatable";
 
 const RenderCampsite = (props) => {
   const { campsite } = props;
   if (campsite) {
     return (
-        
-          <Card  containerStyle={styles.cardContainer}>
-            <Card.Image source={{ uri: baseUrl + campsite.image }}>
-              <View style={{ justifyContent: "center", flex: 1 }}>
-                <Text style={styles.cardText}>{campsite.name}</Text>
-              </View>
-            </Card.Image>
-            <Text style={{ margin: 20 }}>{campsite.description}</Text>
+      <Animatable.View animation="fadeInDownBig" duration={2000} delay={1000}>
+        <Card containerStyle={styles.cardContainer}>
+          <Card.Image source={{ uri: baseUrl + campsite.image }}>
+            <View style={{ justifyContent: "center", flex: 1 }}>
+              <Text style={styles.cardText}>{campsite.name}</Text>
+            </View>
+          </Card.Image>
+          <Text style={{ margin: 20 }}>{campsite.description}</Text>
 
           <View style={styles.cardRow}>
             <Icon
@@ -29,19 +30,20 @@ const RenderCampsite = (props) => {
               }
             />
             <Icon
-              //name={props.isFavorite ? "pencil" : "pencil-o"}
               name="pencil"
               type="font-awesome"
               color="#5637DD"
               raised
               reverse
-              onPress={() => props.onShowModal()}
+              onPress={props.onShowModal}
             />
           </View>
         </Card>
-      );
-    }
-    return <View />;
+      </Animatable.View>
+    );
+  }
+
+  return <View />;
 };
 
 const styles = StyleSheet.create({
